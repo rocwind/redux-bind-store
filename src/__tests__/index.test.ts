@@ -1,5 +1,5 @@
-import { bindStore } from '../index';
 import { ActionCreator, Action, createStore, Reducer, Store } from 'redux';
+import { bindStore } from '../index';
 
 enum ActionTypeEnum {
     Add = 'add',
@@ -51,4 +51,26 @@ it('binded subscribe gets updates', done => {
     });
     expect(store.getState()).toBe(0);
     store.dispatch(add());
+});
+
+it('binded connect propsChangedHandler gets updates', () => {
+    const fn = jest.fn(({ newProps }) => { return newProps.value });
+
+    const { connect } = bindStore(store);
+    connect(state => ({ value: state }), fn);
+    store.dispatch(add());
+
+    expect(fn).toHaveNthReturnedWith(1, 0);
+    expect(fn).toHaveNthReturnedWith(2, 1);
+});
+
+it('binded connect propsChangedHandler updates with prevProps', () => {
+    const fn = jest.fn(({ prevProps }) => { return prevProps && prevProps.value });
+
+    const { connect } = bindStore(store);
+    connect(state => ({ value: state }), fn);
+    store.dispatch(add());
+
+    expect(fn).toHaveNthReturnedWith(1, null);
+    expect(fn).toHaveNthReturnedWith(2, 0);
 });
