@@ -1,0 +1,44 @@
+{
+  "name": "redux-bind-store",
+  "version": "0.0.1",
+  "description": "bind redux store for non-react use",
+  "main": "lib/bundle.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib/"
+  ],
+  "scripts": {
+    "clean": "del-cli lib",
+    "build": "npm run clean && npm run compile && rollup lib/index.js --file lib/bundle.js --format cjs",
+    "compile": "tsc --outDir lib -d",
+    "preversion": "npm test && npm run build",
+    "postversion": "git push origin master && git push origin --tags && npm publish",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rocwind/redux-bind-store.git"
+  },
+  "keywords": [
+    "redux"
+  ],
+  "author": "Roc",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rocwind/redux-bind-store/issues"
+  },
+  "homepage": "https://github.com/rocwind/redux-bind-store#readme",
+  "peerDependencies": {
+    "redux": "*"
+  },
+  "devDependencies": {
+    "@types/jest": "23.3.13",
+    "del-cli": "1.1.0",
+    "jest": "23.6.0",
+    "redux": "^4.0.1",
+    "rollup": "1.1.2",
+    "ts-jest": "23.10.5",
+    "typescript": "3.2.4"
+  }
+}
