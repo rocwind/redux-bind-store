@@ -1,6 +1,6 @@
 {
   "name": "redux-bind-store",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "bind redux store for non-react use",
   "main": "lib/bundle.js",
   "module": "lib/index.js",
