@@ -1,26 +1,19 @@
 import { Action, AnyAction, Dispatch, Store, Unsubscribe } from 'redux';
 import { shallowEqual } from './utils';
 
-export interface MapStateToProps<S> {
-    (state: S): object
+export interface MapStateToProps<S, P> {
+    (state: S): P
 }
 
-export interface PropsChangedEvent<S = any, A extends Action = AnyAction> {
-    newProps: object,
-    prevProps: object,
+export interface PropsChangedEvent<S, P, A extends Action = AnyAction> {
+    newProps: P,
+    prevProps: P,
     getState(): S,
     dispatch: Dispatch<A>,
 }
 
-export interface PropsChangedHandler<S = any, A extends Action = AnyAction> {
-    (event: PropsChangedEvent): void
-}
-
-export interface Connect<S = any, A extends Action = AnyAction> {
-    (
-        mapStateToProps: MapStateToProps<S>,
-        propsChangedHandler: PropsChangedHandler<S, A>
-    ): Unsubscribe
+export interface PropsChangedHandler<S, P, A extends Action = AnyAction> {
+    (event: PropsChangedEvent<S, P, A>): void
 }
 
 export interface BindStoreReturn<S = any, A extends Action = AnyAction> {
@@ -28,7 +21,7 @@ export interface BindStoreReturn<S = any, A extends Action = AnyAction> {
     getState(): S,
     subscribe(listener: () => void): Unsubscribe,
 
-    connect: Connect<S, A>,
+    connect<P>(mapStateToProps: MapStateToProps<S, P>, propsChangedHandler: PropsChangedHandler<S, P, A>): Unsubscribe,
 }
 
 export function bindStore<S = any, A extends Action = AnyAction>(
@@ -38,7 +31,7 @@ export function bindStore<S = any, A extends Action = AnyAction>(
     const getState = store.getState.bind(store);
     const subscribe = store.subscribe.bind(store);
 
-    const connect: Connect<S, A> = (mapStateToProps, propsChangedHandler) => {
+    const connect = (mapStateToProps, propsChangedHandler) => {
         // initial props
         let props = mapStateToProps(store.getState());
         propsChangedHandler({
