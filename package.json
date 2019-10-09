@@ -39,6 +39,6 @@
     "redux": "4.0.4",
     "rollup": "1.23.1",
     "ts-jest": "24.1.0",
-    "typescript": "3.6.3"
+    "typescript": "3.6.4"
   }
 }
