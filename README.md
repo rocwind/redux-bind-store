@@ -1,4 +1,4 @@
-# redux-bind-store [![Build Status](https://travis-ci.org/rocwind/redux-bind-store.svg?branch=master)](https://travis-ci.org/rocwind/redux-bind-store)
+# redux-bind-store ![Node.js CI](https://github.com/rocwind/redux-bind-store/workflows/Node.js%20CI/badge.svg)
 
 ## Install
 `npm i --save redux-bind-store`
