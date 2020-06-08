@@ -37,7 +37,7 @@
     "del-cli": "3.0.1",
     "jest": "26.0.1",
     "redux": "4.0.5",
-    "rollup": "2.14.0",
+    "rollup": "2.15.0",
     "ts-jest": "26.1.0",
     "typescript": "3.9.5"
   }
