@@ -33,7 +33,7 @@
     "redux": "*"
   },
   "devDependencies": {
-    "@types/jest": "26.0.7",
+    "@types/jest": "26.0.8",
     "del-cli": "3.0.1",
     "jest": "26.2.1",
     "redux": "4.0.5",
